@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import PageShell from "@/components/layout/PageShell";
 import FeaturedBanner from "@/components/home/FeaturedBanner";
@@ -13,6 +13,37 @@ import { useUIStore } from "@/store";
 
 export default function HomePage() {
   const { searchQuery, activeCategory } = useUIStore();
+  const [mounted, setMounted] = useState(false);
+  const [timeString, setTimeString] = useState("");
+  const [greeting, setGreeting] = useState("Good afternoon");
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+    const updateTime = () => {
+      const now = new Date();
+      const hours = now.getHours();
+      
+      let greet = "Good afternoon";
+      if (hours < 12) {
+        greet = "Good morning";
+      } else if (hours < 17) {
+        greet = "Good afternoon";
+      } else if (hours < 22) {
+        greet = "Good evening";
+      } else {
+        greet = "Good night";
+      }
+      setGreeting(greet);
+
+      const formatted = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+      setTimeString(formatted);
+    };
+
+    updateTime();
+    const timer = setInterval(updateTime, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   const filtered = useMemo(() => {
     let items = menuItems;
@@ -41,7 +72,9 @@ export default function HomePage() {
       {/* Header */}
       <header className="flex items-center justify-between px-4 pt-12 pb-5">
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
-          <p className="text-[#7a6e50] text-xs tracking-widest uppercase mb-0.5">Good afternoon 👋</p>
+          <p className="text-[#7a6e50] text-xs tracking-widest uppercase mb-0.5">
+            {mounted ? `${greeting} 👋 • ${timeString}` : "Good afternoon 👋"}
+          </p>
           <h1 className="text-white text-2xl font-bold leading-tight">
             What would you like <br />
             <span className="text-gradient">to eat today?</span>

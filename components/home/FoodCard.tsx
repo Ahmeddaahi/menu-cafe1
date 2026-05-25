@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { MenuItem } from "@/types";
@@ -17,8 +18,14 @@ export default function FoodCard({ item, index, variant = "default" }: FoodCardP
   const { toggle, isFav } = useFavStore();
   const setSelected = useUIStore((s) => s.setSelectedItem);
 
-  const inCart = cartItems.find((c) => c.id === item.id);
-  const fav    = isFav(item.id);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
+
+  const inCart = mounted ? cartItems.find((c) => c.id === item.id) : undefined;
+  const fav    = mounted ? isFav(item.id) : false;
 
   if (variant === "wide") {
     return (
