@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import PageShell from "@/components/layout/PageShell";
 import { useCartStore, useFavStore } from "@/store";
@@ -7,6 +8,11 @@ import { useCartStore, useFavStore } from "@/store";
 export default function ProfilePage() {
   const count = useCartStore((s) => s.count());
   const { ids } = useFavStore();
+
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const menuItems = [
     { icon: "📦", label: "Order History", sub: "View past orders" },
@@ -51,8 +57,8 @@ export default function ProfilePage() {
         <div className="grid grid-cols-3 gap-3 mb-6">
           {[
             { label: "Orders", value: "0" },
-            { label: "Saved", value: String(ids.length) },
-            { label: "In Cart", value: String(count) },
+            { label: "Saved", value: mounted ? String(ids.length) : "0" },
+            { label: "In Cart", value: mounted ? String(count) : "0" },
           ].map((stat, i) => (
             <motion.div
               key={stat.label}

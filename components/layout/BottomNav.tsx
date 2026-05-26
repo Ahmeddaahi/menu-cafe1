@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useCartStore } from "@/store";
@@ -57,6 +58,11 @@ export default function BottomNav() {
   const pathname = usePathname();
   const router = useRouter();
   const count = useCartStore((s) => s.count());
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] z-50">
@@ -86,7 +92,7 @@ export default function BottomNav() {
                 </span>
 
                 {/* Cart badge */}
-                {item.showBadge && count > 0 && (
+                {item.showBadge && mounted && count > 0 && (
                   <motion.span
                     key={count}
                     initial={{ scale: 0 }}

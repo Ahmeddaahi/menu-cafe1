@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useFavStore } from "@/store";
@@ -11,6 +12,29 @@ export default function FavoritesPage() {
   const { ids } = useFavStore();
   const router  = useRouter();
   const favItems = menuItems.filter((m) => ids.includes(m.id));
+
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <PageShell>
+        <header className="px-4 pt-12 pb-6">
+          <p className="text-[#7a6e50] text-xs tracking-widest uppercase mb-0.5">Your Wishlist</p>
+          <h1 className="text-white text-2xl font-bold">Saved Items</h1>
+        </header>
+        <div className="flex flex-col items-center justify-center px-4 py-20 text-center">
+          <div className="text-7xl mb-5">🤍</div>
+          <h2 className="text-white text-xl font-bold mb-2">Nothing saved yet</h2>
+          <p className="text-[#7a6e50] text-sm mb-8 max-w-xs">
+            Tap the heart on any dish to save it here for later.
+          </p>
+        </div>
+      </PageShell>
+    );
+  }
 
   return (
     <PageShell>

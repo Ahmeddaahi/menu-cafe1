@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useCartStore } from "@/store";
@@ -15,6 +16,31 @@ export default function CartPage() {
   const subtotal = total();
   const delivery = subtotal >= FREE_DELIVERY_THRESHOLD ? 0 : DELIVERY_FEE;
   const grand = subtotal + delivery;
+
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <PageShell>
+        <header className="flex items-center justify-between px-4 pt-12 pb-5">
+          <div>
+            <p className="text-[#7a6e50] text-xs tracking-widest uppercase mb-0.5">Your Order</p>
+            <h1 className="text-white text-2xl font-bold">Cart</h1>
+          </div>
+        </header>
+        <div className="flex flex-col items-center justify-center px-4 py-24 text-center">
+          <div className="text-7xl mb-5">🛒</div>
+          <h2 className="text-white text-xl font-bold mb-2">Your cart is empty</h2>
+          <p className="text-[#7a6e50] text-sm mb-8 max-w-xs">
+            Looks like you haven&apos;t added anything yet. Explore our menu!
+          </p>
+        </div>
+      </PageShell>
+    );
+  }
 
   return (
     <PageShell>
