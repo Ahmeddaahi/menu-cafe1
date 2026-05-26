@@ -50,17 +50,19 @@ export default function FeaturedBanner() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#090806] via-[#090806]/40 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#090806]/60 to-transparent" />
 
-        {/* Badge */}
-        {item.tags?.[0] && (
-          <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#FFB800] text-black text-[10px] font-bold uppercase tracking-wider">
-            {item.tags[0]}
-          </div>
-        )}
-        {item.new && (
-          <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#22C55E] text-black text-[10px] font-bold uppercase tracking-wider">
-            New
-          </div>
-        )}
+        {/* Badges */}
+        <div className="absolute top-3 left-3 flex gap-1.5">
+          {item.tags?.[0] && (
+            <span className="px-2.5 py-1 rounded-full bg-[#FFB800] text-black text-[10px] font-bold uppercase tracking-wider">
+              {item.tags[0]}
+            </span>
+          )}
+          {item.new && (
+            <span className="px-2.5 py-1 rounded-full bg-[#22C55E] text-black text-[10px] font-bold uppercase tracking-wider">
+              New
+            </span>
+          )}
+        </div>
 
         {/* Halal badge */}
         <div className="absolute top-3 right-3 w-10 h-10 rounded-full bg-[#DC2626] flex items-center justify-center">
