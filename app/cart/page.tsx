@@ -67,7 +67,7 @@ export default function CartPage() {
               className="mb-5 p-3 rounded-2xl bg-[#171410] border border-[#2c2820]"
             >
               <div className="flex justify-between text-xs mb-2">
-                <span className="text-[#c4b585]">Add £{(FREE_DELIVERY_THRESHOLD - subtotal).toFixed(2)} more for free delivery 🚀</span>
+                <span className="text-[#c4b585]">Add ${(FREE_DELIVERY_THRESHOLD - subtotal).toFixed(2)} more for free delivery 🚀</span>
                 <span className="text-[#FFB800] font-semibold">{Math.round((subtotal / FREE_DELIVERY_THRESHOLD) * 100)}%</span>
               </div>
               <div className="h-1.5 bg-[#2c2820] rounded-full overflow-hidden">
@@ -114,7 +114,7 @@ export default function CartPage() {
                     </div>
 
                     <div className="text-[#FFB800] font-bold text-sm mt-0.5 mb-2">
-                      £{(item.price * item.quantity).toFixed(2)}
+                      ${(item.price * item.quantity).toFixed(2)}
                     </div>
 
                     {/* Qty controls */}
@@ -134,7 +134,7 @@ export default function CartPage() {
                       >
                         +
                       </motion.button>
-                      <span className="text-[#7a6e50] text-xs ml-1">× £{item.price.toFixed(2)}</span>
+                      <span className="text-[#7a6e50] text-xs ml-1">× ${item.price.toFixed(2)}</span>
                     </div>
                   </div>
                 </motion.div>
@@ -154,20 +154,20 @@ export default function CartPage() {
             <div className="space-y-2.5 mb-4">
               <div className="flex justify-between text-sm">
                 <span className="text-[#7a6e50]">Subtotal ({items.length} items)</span>
-                <span className="text-white font-medium">£{subtotal.toFixed(2)}</span>
+                <span className="text-white font-medium">${subtotal.toFixed(2)}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-[#7a6e50]">Delivery</span>
                 {delivery === 0 ? (
                   <span className="text-[#22C55E] font-medium">FREE 🎉</span>
                 ) : (
-                  <span className="text-white font-medium">£{delivery.toFixed(2)}</span>
+                  <span className="text-white font-medium">${delivery.toFixed(2)}</span>
                 )}
               </div>
               <div className="h-px bg-[#2c2820]" />
               <div className="flex justify-between">
                 <span className="text-white font-bold">Total</span>
-                <span className="text-[#FFB800] font-bold text-lg">£{grand.toFixed(2)}</span>
+                <span className="text-[#FFB800] font-bold text-lg">${grand.toFixed(2)}</span>
               </div>
             </div>
           </motion.div>
@@ -191,7 +191,7 @@ export default function CartPage() {
             style={{ boxShadow: "0 12px 40px rgba(255,184,0,0.3)" }}
           >
             <span>Place Order</span>
-            <span className="bg-black/20 px-3 py-1 rounded-full text-sm">£{grand.toFixed(2)}</span>
+            <span className="bg-black/20 px-3 py-1 rounded-full text-sm">${grand.toFixed(2)}</span>
           </motion.button>
 
           <p className="text-center text-[#4a4230] text-xs mt-3">

@@ -83,7 +83,7 @@ export default function FeaturedBanner() {
             <h2 className="text-white text-xl font-bold leading-tight mb-2">{item.name}</h2>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <span className="text-[#FFB800] text-lg font-bold">£{item.price.toFixed(2)}</span>
+                <span className="text-[#FFB800] text-lg font-bold">${item.price.toFixed(2)}</span>
                 <span className="flex items-center gap-1 text-xs text-[#c4b585]">
                   <span className="text-[#FFB800]">★</span> {item.rating}
                 </span>

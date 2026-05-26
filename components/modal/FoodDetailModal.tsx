@@ -118,7 +118,7 @@ export default function FoodDetailModal() {
                 </div>
               </div>
               <div className="text-right">
-                <div className="text-[#FFB800] text-2xl font-bold">£{selectedItem.price.toFixed(2)}</div>
+                <div className="text-[#FFB800] text-2xl font-bold">${selectedItem.price.toFixed(2)}</div>
                 {selectedItem.calories && (
                   <div className="text-[#7a6e50] text-xs mt-0.5">{selectedItem.calories} cal</div>
                 )}
@@ -202,7 +202,7 @@ export default function FoodDetailModal() {
               style={{ boxShadow: "0 8px 30px rgba(255,184,0,0.3)" }}
             >
               <span>Add to Cart</span>
-              <span>£{(selectedItem.price * qty).toFixed(2)}</span>
+              <span>${(selectedItem.price * qty).toFixed(2)}</span>
             </motion.button>
           </div>
         </div>

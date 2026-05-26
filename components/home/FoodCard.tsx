@@ -69,7 +69,7 @@ export default function FoodCard({ item, index, variant = "default" }: FoodCardP
 
           <div className="flex items-center justify-between">
             <div>
-              <span className="text-[#FFB800] font-bold text-sm">£{item.price.toFixed(2)}</span>
+              <span className="text-[#FFB800] font-bold text-sm">${item.price.toFixed(2)}</span>
               <div className="flex items-center gap-1 mt-0.5">
                 <span className="text-[#FFB800] text-xs">★</span>
                 <span className="text-[#7a6e50] text-xs">{item.rating} ({item.reviews})</span>
@@ -165,7 +165,7 @@ export default function FoodCard({ item, index, variant = "default" }: FoodCardP
 
         {/* Price + add */}
         <div className="flex items-center justify-between">
-          <span className="text-[#FFB800] font-bold text-base">£{item.price.toFixed(2)}</span>
+          <span className="text-[#FFB800] font-bold text-base">${item.price.toFixed(2)}</span>
           <motion.button
             whileTap={{ scale: 0.85 }}
             onClick={(e) => { e.stopPropagation(); addItem(item); }}
