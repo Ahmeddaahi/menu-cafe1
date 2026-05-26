@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import FoodDetailModal from "@/components/modal/FoodDetailModal";
+import BottomNav from "@/components/layout/BottomNav";
 
 export const metadata: Metadata = {
   title: "Shawarma World Menu",
@@ -26,9 +27,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="antialiased bg-[#090806]">
-        <div className="page-container shadow-2xl shadow-black/60">
+        <div className="page-container shadow-2xl shadow-black/60 pb-24">
           {children}
           <FoodDetailModal />
+          <BottomNav />
         </div>
       </body>
     </html>

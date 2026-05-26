@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { useCartStore } from "@/store";
 
@@ -56,7 +57,6 @@ const navItems = [
 
 export default function BottomNav() {
   const pathname = usePathname();
-  const router = useRouter();
   const count = useCartStore((s) => s.count());
   const [mounted, setMounted] = useState(false);
 
@@ -71,12 +71,11 @@ export default function BottomNav() {
           {navItems.map((item) => {
             const active = pathname === item.href;
             return (
-              <motion.button
-                key={item.href}
-                onClick={() => router.push(item.href)}
-                whileTap={{ scale: 0.88 }}
-                className="relative flex flex-col items-center gap-1 px-3 py-1.5 rounded-2xl min-w-[60px]"
-              >
+              <Link href={item.href} key={item.href} className="flex-1 flex justify-center no-underline select-none">
+                <motion.div
+                  whileTap={{ scale: 0.88 }}
+                  className="relative flex flex-col items-center gap-1 px-3 py-1.5 rounded-2xl min-w-[60px] cursor-pointer w-full"
+                >
                 {/* Active background pill */}
                 {active && (
                   <motion.div
@@ -111,7 +110,8 @@ export default function BottomNav() {
                 >
                   {item.label}
                 </span>
-              </motion.button>
+              </motion.div>
+            </Link>
             );
           })}
         </div>
